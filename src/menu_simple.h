@@ -133,6 +133,7 @@ putchar('\n');
 static inline void smn_do_menu(const char* menu_opts[], int max_opt,
                                void* data, void (*func_opts)(void*, int))
 {
+    static int called_once = 1;
     int opt;
     for ( ; ; ) {
         smn_clear_screen();
@@ -143,11 +144,15 @@ static inline void smn_do_menu(const char* menu_opts[], int max_opt,
             func_opts(data, opt);
         }
         if (opt != max_opt) {
-            smn_pause();
+            if (called_once) {
+                smn_pause();
+            }
+            called_once = 1;
         } else {
             break;
         }
     }
+    called_once = 0;
 }
 
 #endif // SIMPLE_MENU_H
