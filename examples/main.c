@@ -1,4 +1,4 @@
-#include <menu_simple.h>
+#include <simple_menu.h>
 #include <stdio.h>
 
 // First we declare our menus as an array of const char*.
