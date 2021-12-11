@@ -4,11 +4,11 @@ Simple menú es una sencilla librería de solo inclusión en C para mostrar men�
 
 ## Instalación
 
-Solo copialo y incluyelo en tu proyecto.
+Solo copialo e incluyelo a tu proyecto.
 
 ## Ejemplo
 ```c
-#include <menu_simple.h>
+#include <simple_menu.h>
 #include <stdio.h>
 
 // Primero declaramos nuestros menús como arreglo de puntero a caracteres(un arreglo de palabras).
