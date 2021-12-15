@@ -12,6 +12,7 @@ Just copy it and include it in your project.
 #include <stdio.h>
 
 // First we declare our menus as an array of const char*.
+// [WARNING]: the array must end en NULL
 const char* MAIN_MENU[] =
 {
     "WELCOME!",
