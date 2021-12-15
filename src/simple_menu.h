@@ -24,11 +24,11 @@
 #endif
 
 #ifndef SMN_VERTICAL_BAR
-#define SMN_VERTICAL_BAR   '-'
+#define SMN_VERTICAL_BAR   '|'
 #endif
 
 #ifndef SMN_HORIZONTAL_BAR
-#define SMN_HORIZONTAL_BAR '|'
+#define SMN_HORIZONTAL_BAR '-'
 #endif
 
 static inline size_t smn_find_max_len(const char* menu[])
