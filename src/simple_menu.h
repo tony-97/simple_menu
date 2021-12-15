@@ -7,27 +7,27 @@
 #include <stdlib.h>
 
 #ifndef SMN_TOP_LEFT_CORNER
-#define SMN_TOP_LEFT_CORNER  "+"
+#define SMN_TOP_LEFT_CORNER  '+'
 #endif
 
 #ifndef SMN_TOP_RIGHT_CORNER
-#define SMN_TOP_RIGHT_CORNER "+"
+#define SMN_TOP_RIGHT_CORNER '+'
 #endif
 
 #ifndef SMN_BOTTOM_LEFT_CORNER
-#define SMN_BOTTOM_LEFT_CORNER  "+"
+#define SMN_BOTTOM_LEFT_CORNER '+'
 #endif
 
 #ifndef SMN_BOTTOM_RIGHT_CORNER
-#define SMN_BOTTOM_RIGHT_CORNER "+"
+#define SMN_BOTTOM_RIGHT_CORNER '+'
 #endif
 
 #ifndef SMN_VERTICAL_BAR
-#define SMN_VERTICAL_BAR   "-"
+#define SMN_VERTICAL_BAR   '-'
 #endif
 
 #ifndef SMN_HORIZONTAL_BAR
-#define SMN_HORIZONTAL_BAR "|"
+#define SMN_HORIZONTAL_BAR '|'
 #endif
 
 static inline size_t smn_find_max_len(const char* menu[])
@@ -43,13 +43,13 @@ static inline size_t smn_find_max_len(const char* menu[])
     return max_len;
 }
 
-static inline void smn_print_bar(size_t len)
+static inline void smn_print_bar(size_t len, char begin, char end, char middle)
 {
-    putchar('+');
+    putchar(begin);
     for (size_t i = 0; i < len + 2; ++i) {
-        putchar('-');
+        putchar(middle);
     }
-    putchar('+');
+    putchar(end);
     putchar('\n');
 }
 
@@ -73,20 +73,26 @@ static inline void smn_print_align_right(const char* str, int width)
 static inline void smn_print_menu(const char* menu[])
 {
     const size_t max_len = smn_find_max_len(menu);
-    smn_print_bar(max_len);
+    smn_print_bar(max_len,
+                  SMN_TOP_LEFT_CORNER,
+                  SMN_TOP_RIGHT_CORNER,
+                  SMN_HORIZONTAL_BAR);
     for (size_t i = 0; menu[i] != NULL; ++i) {
-        printf("| ");
+        printf("%c ", SMN_VERTICAL_BAR);
         if (i == 0) {
             smn_print_align_center(menu[i], max_len);
         } else {
             smn_print_align_left(menu[i], max_len);
         }
-        printf(" |\n");
+        printf(" %c\n", SMN_VERTICAL_BAR);
     }
-    smn_print_bar(max_len);
+    smn_print_bar(max_len,
+                  SMN_BOTTOM_LEFT_CORNER,
+                  SMN_BOTTOM_RIGHT_CORNER,
+                  SMN_HORIZONTAL_BAR);
 }
 
-static inline void smn_clear_stdin()
+static inline void smn_stdin_clear()
 {
     char c;
     while ((c = getchar()) != EOF && c != '\n');
@@ -97,12 +103,12 @@ static inline int smn_validate_opt(int max_opt)
     int opt;
     int err = 0;
     do {
-        printf("¿Opcion?: ");
+        printf("Option: ");
         scanf("%d", &opt);
-        smn_clear_stdin();
+        smn_stdin_clear();
         err = opt < 1 || opt > max_opt;
         if (err) {
-            printf("Opcion incorrecta, intente nuevamanete...\n");
+            printf("Invalid option, please try again...\n");
         }
     } while (err);
 
@@ -124,8 +130,8 @@ putchar('\n');
 #if defined(_WIN32) || defined(_WIN64)
     system("pause");
 #else 
-    printf("Presione [ENTER] para continuar...");
-    smn_clear_stdin();
+    printf("Press [ENTER] to continue...");
+    smn_stdin_clear();
 #endif
 putchar('\n');
 }
