@@ -43,7 +43,7 @@ static inline size_t mns_busca_tamanio_mas_grande(const char* menu[])
     return max_len;
 }
 
-static inline void mns_imprime_barra(size_t len, char begin, char end, char middle)
+static inline void mns_imprime_barra(size_t len, int begin, int end, int middle)
 {
     putchar(begin);
     for (size_t i = 0; i < len + 2; ++i) {
