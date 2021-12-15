@@ -23,11 +23,11 @@
 #endif
 
 #ifndef MNS_BARRA_VERTICAL
-#define MNS_BARRA_VERTICAL   '-'
+#define MNS_BARRA_VERTICAL   '|'
 #endif
 
 #ifndef MNS_BARRA_HORIZONTAL
-#define MNS_BARRA_HORIZONTAL '|'
+#define MNS_BARRA_HORIZONTAL '-'
 #endif
 
 static inline size_t mns_busca_tamanio_mas_grande(const char* menu[])
