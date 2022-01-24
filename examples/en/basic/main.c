@@ -21,6 +21,16 @@ const char* SUB_MENU2[] =
     NULL
 };
 
+const char* SUB_MENU22[] =
+{
+    "Sub Menu22",
+    "================",
+    "2.2.1.- 1st Option.",
+    "2.2.2.- 2nd Option.",
+    "2.2.3.- Return Option.",
+    NULL
+};
+
 // then we declare our functions that will be called with the current
 // option selected by the user 
 
@@ -31,7 +41,7 @@ void sub_menu2(void* data, int opt)
         printf("Entered first option from the sub menu2...\n");
         break;
     case 2:
-        printf("Entered second option from the sub menu2...\n");
+        smn_do_menu(SUB_MENU22, 3, NULL, NULL);
         break;
     }
 }
