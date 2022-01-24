@@ -136,27 +136,29 @@ putchar('\n');
 putchar('\n');
 }
 
+static inline int mns_menu(const char* menu_opts[], int max_opt)
+{
+    mns_limpia_pantalla();
+    mns_imprime_menu(menu_opts);
+    int opt = mns_valida_opcion(max_opt);
+    mns_limpia_pantalla();
+
+    return opt;
+}
+
 static inline void mns_hacer_menu(const char* menu_opts[], int max_opt,
                                   void* data, void (*func_opts)(void*, int))
 {
     static int called_once = 1;
     int opt;
-    for ( ; ; ) {
-        mns_limpia_pantalla();
-        mns_imprime_menu(menu_opts);
-        opt = mns_valida_opcion(max_opt);
-        mns_limpia_pantalla();
+    while ((opt = mns_menu(menu_opts, max_opt)) != max_opt) {
         if (func_opts != NULL) {
             func_opts(data, opt);
         }
-        if (opt != max_opt) {
-            if (called_once) {
-                mns_pausa();
-            }
-            called_once = 1;
-        } else {
-            break;
+        if (called_once) {
+            mns_pausa();
         }
+        called_once = 1;
     }
     called_once = 0;
 }
